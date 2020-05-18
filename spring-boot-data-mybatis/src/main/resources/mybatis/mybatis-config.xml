@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--设置驼峰命名映射
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>-->
+
+
+    <!--使用typeAliases配置别名，它只能配置domain中类的别名
+    <typeAliases>
+        <package name="com.szh.springbootdata.bean"></package>
+    </typeAliases> -->
+
+</configuration>

@@ -1,0 +1,70 @@
+spring:
+  datasource:
+    #数据基本配置
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/day14?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #始终执行初始化(执行建表sql脚本)
+    #initialization-mode: always
+    #配置建表sql文件位置
+    #schema:
+      #- classpath:sql/department.sql
+      #- classpath:sql/employee.sql
+    #druid连接池配置
+    druid:
+      initial-size: 5
+      max-active: 100
+      min-idle: 5
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 1 FROM DUAL
+      validation-query-timeout: 60000
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 100000
+
+      ###监控配置 begin###
+      # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
+      web-stat-filter.enabled: true
+      web-stat-filter.url-pattern: /*
+      web-stat-filter.exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      # StatViewServlet配置，说明请参考Druid Wiki，配置_StatViewServlet配置
+      stat-view-servlet.enabled:  true
+      stat-view-servlet.url-pattern:  /druid/*
+      stat-view-servlet.reset-enable:  false
+      stat-view-servlet.login-username:  admin
+      stat-view-servlet.login-password:  123456
+      #stat-view-servlet.allow:  127.0.0.1
+      ###监控配置 end###
+      # 配置StatFilter
+      filter.stat.db-type: mysql
+      filter.stat.log-slow-sql: true
+      filter.stat.slow-sql-millis: 5000
+
+      # 配置WallFilter
+      filter.wall.enabled: true
+      filter.wall.db-type: mysql
+      #是否允许删除数据
+      filter.wall.config.delete-allow: true
+      #是否允许删除表
+      filter.wall.config.drop-table-allow: true
+      filter:
+        slf4j:
+          enabled: true
+
+#mybatis配置
+mybatis:
+  # 指定全局配置文件位置
+  #config-location: classpath:mybatis/mybatis-config.xml
+  # 指定sql映射文件位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  #配置别名
+  type-aliases-package: com.szh.springbootdata.bean
+  #配置自动映射数据库驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
